@@ -10,7 +10,7 @@ var db = require("./models");
 
 var PORT = process.env.PORT || 3120;
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/dbreddit";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongolab-adjacent-88414";
 
 
 var app = express();
@@ -51,9 +51,6 @@ app.get("/collect", function(req, res) {
             console.log(err);
           });
       });
-  
-
-      res.send("Scrape Complete");
     });
   });
   

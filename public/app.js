@@ -3,7 +3,7 @@ $.getJSON("/articles", function(data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
 
-      $("#articles").append("<p id='text' data-id='" + data[i]._id + "'>" + data[i].title + "<br>" + data[i].link + "</p>" + "<br>" + "<br>");
+      $("#articles").append("<p id='text' data-id='" + data[i]._id + "'>" + data[i].title + "<br>" + data[i].link + "</p>" + "<br>");
     }
   });
   

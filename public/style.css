@@ -38,6 +38,8 @@
 
 #text{font-weight: bold;
 font-size: 20px;
+width:45vw;
+word-wrap: break-word;
 }
 
 #noteTitle{font-weight: bold;
