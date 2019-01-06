@@ -7,7 +7,11 @@ var cheerio = require("cheerio");
 
 var db = require("./models");
 
-var PORT = 3002;
+
+var PORT = process.env.PORT || 3120;
+
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/dbreddit";
+
 
 var app = express();
 
@@ -16,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/dbReddit", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true});
 
 app.get("/collect", function(req, res) {
 
@@ -38,9 +42,9 @@ app.get("/collect", function(req, res) {
 
 
         db.Article.create(result)
-          .then(function(dbReddit) {
+          .then(function(dbreddit) {
 
-            console.log(dbReddit);
+            console.log(dbreddit);
           })
           .catch(function(err) {
 
@@ -56,9 +60,9 @@ app.get("/collect", function(req, res) {
 
 app.get("/articles", function(req, res) {
   db.Article.find({})
-    .then(function(dbReddit) {
+    .then(function(dbreddit) {
 
-      res.json(dbReddit);
+      res.json(dbreddit);
     })
     .catch(function(err) {
 
@@ -72,9 +76,9 @@ app.get("/articles/:id", function(req, res) {
   db.Article.findOne({ _id: req.params.id })
 
     .populate("note")
-    .then(function(dbReddit) {
+    .then(function(dbreddit) {
         
-      res.json(dbReddit);
+      res.json(dbreddit);
     })
     .catch(function(err) {
         
@@ -90,9 +94,9 @@ app.post("/articles/:id", function(req, res) {
 
       return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
     })
-    .then(function(dbReddit) {
+    .then(function(dbreddit) {
         
-      res.json(dbReddit);
+      res.json(dbreddit);
     })
     .catch(function(err) {
         
